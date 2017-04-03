@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>S.T.A.C.E.</title>
+	<h:outputStylesheet library="bootstrap" name="css/bootstrap.css" target="head" />
+	<h:outputStylesheet library="css" name="login.css" target="head" />	
+</h:head>	
+<h:body>
+	<div class="login-page">
+	  <div class="form">
+	    <form class="register-form">
+	      <input type="text" placeholder="name"/>
+	      <input type="password" placeholder="password"/>
+	      <input type="text" placeholder="email address"/>
+	      <button>create</button>
+	      <p class="message">Already registered? <a href="#">Sign In</a></p>
+	    </form>
+	    <form class="login-form">
+	   	  <h1>S.T.A.C.E</h1>
+	   	  <h6><b>Sistema Acadêmico de Controle de Estágio</b></h6>	
+	      <input type="text" placeholder="login"/>
+	      <input type="password" placeholder="senha"/>
+	      <button>login</button>
+	      <p class="message">Não tem cadastro? <a href="#">registre-se</a></p>
+	      <div class="row padding" style="margin-top:20px">
+	      	<div class="col-md-offset-4 col-md-4">
+	      		<h:graphicImage library="images" name="logo-ifpb.png" class="img-responsive" alt="IFPB" height="70" width="70"/>
+	      	</div>
+		  </div>
+	    </form>	
+	  </div>
+	  <div class="row col-md-12 text-center">
+	   		<span style="color:#FFF">© STACE 2017 | IFPB</span>	
+	  </div>	
+	</div>		
+</h:body>
+
+</html>
