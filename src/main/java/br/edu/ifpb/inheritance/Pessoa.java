@@ -57,7 +57,7 @@ public class Pessoa{
 	}
 
 	public void setTelefone(String telefone) {
-		telefone = telefone;
+		this.telefone = telefone;
 	}
 
 	public boolean isAprovado() {
