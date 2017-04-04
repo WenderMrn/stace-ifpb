@@ -1,5 +1,7 @@
 package br.edu.ifpb.stace.bean;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -13,7 +15,8 @@ import br.edu.ifpb.stace.util.StaceException;
 
 @ManagedBean
 @SessionScoped
-public class LoginBean extends GenericBean{	
+public class LoginBean extends GenericBean implements Serializable{	
+	private static final long serialVersionUID = 1L;
 	private Pessoa usuario;
 	private String perfil;
 	
@@ -40,15 +43,17 @@ public class LoginBean extends GenericBean{
 
 	public String autenticar() throws Exception{
 		String resultado = null;
+		
 		try {
-			LoginController loginCtrl = new LoginController();	
-			Pessoa p = loginCtrl.autenticar(this.usuario);
 			
-			if(p instanceof Aluno){
+			LoginController loginCtrl = new LoginController();	
+			this.usuario = loginCtrl.autenticar(this.usuario);
+			
+			if(this.usuario instanceof Aluno){
 				this.perfil = "ALUNO";
-			}else if(p instanceof Empresa){
+			}else if(this.usuario instanceof Empresa){
 				this.perfil = "EMPRESA";
-			}else if(p instanceof Coordenador){
+			}else if(this.usuario instanceof Coordenador){
 				this.perfil = "COORDENADOR";
 			}
 			

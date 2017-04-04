@@ -3,6 +3,8 @@ package br.edu.ifpb.stace.controllers;
 import java.util.Collections;
 import java.util.Map;
 
+import br.edu.ifpb.inheritance.Pessoa;
+import br.edu.ifpb.stace.dao.AlunoDAO;
 import br.edu.ifpb.stace.dao.EmpresaDAO;
 import br.edu.ifpb.stace.dao.OfertaEstagioDAO;
 import br.edu.ifpb.stace.dao.PersistenceUtil;
@@ -54,31 +56,19 @@ public class OfertaEstagioController {
 		return resultado;
 	}
 	
-	public Resultado canceInscreverAluno(Map<String, String[]> parametros,Aluno aluno) throws Exception{
+	public void canceInscreverAluno(OfertaEstagio ofertaEstagio,Aluno aluno) throws Exception{
 		
-		Resultado resultado= new Resultado();
-		OfertaEstagio ofertaEstagio;
-		
-		IValidatorFactory vf = new ConcretValidatorFactory(); 
-		IValidator validador = vf.getValidatorType(ValidatorType.INS_CANC_ALUNO_OFERTA);
-		
-		if(validador.isValidParameters(parametros)){
-			
-			ofertaEstagio = (OfertaEstagio)validador.getResultado().getEntidade();
-
-			if(ofertaEstagio == null){
-				resultado.setErro(true);
-				resultado.setMensagens(validador.getResultado().getMensagens());
+			if(ofertaEstagio != null && aluno != null){
+				
+					ofertaEstagio.addRmCondidato((Aluno)aluno);
+					OfertaEstagioDAO dao = new OfertaEstagioDAO(PersistenceUtil.getCurrentEntityManager());
+					dao.beginTransaction();
+					dao.update(ofertaEstagio);
+					dao.commit();
+				
 			}else{
-				ofertaEstagio.addRmCondidato(aluno);
-				OfertaEstagioDAO dao = new OfertaEstagioDAO(PersistenceUtil.getCurrentEntityManager());
-				dao.beginTransaction();
-				dao.update(ofertaEstagio);
-				dao.commit();
+				throw new StaceException("Oferta de Estágio e/ou Aluno devem ser informado(s).");
 			}
-		}
-		
-		return resultado;
 		
 	}
 	

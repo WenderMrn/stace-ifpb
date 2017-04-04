@@ -206,12 +206,12 @@ public class FrontControllerServlet extends HttpServlet {
 			proxPagina = "pages/ofertaestagio/listagem.jsp";
 			Aluno aluno = (Aluno) usuario;
 			resultado =  new Resultado();
-			try {
+			/*try {
 				resultado = ofertaEstagioCtrl.canceInscreverAluno(request.getParameterMap(),aluno);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			if(!resultado.isErro()) {
 				request.setAttribute("msgs", resultado.getMensagens());
 				resultado.setErro(false);

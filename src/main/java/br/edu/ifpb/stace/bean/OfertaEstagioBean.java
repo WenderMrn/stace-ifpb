@@ -1,22 +1,47 @@
 package br.edu.ifpb.stace.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import br.edu.ifpb.stace.controllers.OfertaEstagioController;
 import br.edu.ifpb.stace.dao.EmpresaDAO;
 import br.edu.ifpb.stace.dao.OfertaEstagioDAO;
 import br.edu.ifpb.stace.dao.PersistenceUtil;
+import br.edu.ifpb.stace.entity.Aluno;
 import br.edu.ifpb.stace.entity.Empresa;
 import br.edu.ifpb.stace.entity.OfertaEstagio;
+import br.edu.ifpb.stace.util.StaceException;
 import br.edu.ifpb.stace.util.StatusOfertaEstagio;
 
 @ManagedBean
 @ViewScoped
-public class OfertaEstagioBean extends GenericBean{
+public class OfertaEstagioBean extends GenericBean implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
+	@ManagedProperty(value="#{loginBean}")
+	private LoginBean loginBean;
+	private OfertaEstagioController  ofertaEstagioCtrl;
+	
+	@PostConstruct
+	public void init(){
+		this.ofertaEstagioCtrl = new OfertaEstagioController();
+	}
+	
+	
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
+	}
+
 	public List<OfertaEstagio> getOfertasEstagio() {
 		OfertaEstagioDAO dao = new OfertaEstagioDAO(PersistenceUtil.getCurrentEntityManager());
 		List<OfertaEstagio> ofertas = dao.findAll();
@@ -41,25 +66,32 @@ public class OfertaEstagioBean extends GenericBean{
 		return empresa.getOfertadasEstagio();
 	}
 	
-	public String aprovarOfertaEstagio(OfertaEstagio ofestagio){
-		OfertaEstagioController  ofertaEstagioCtrl = new OfertaEstagioController();		
+	public String aprovarOfertaEstagio(OfertaEstagio ofestagio) throws Exception{		
 		try {
-			ofertaEstagioCtrl.statusOfertaEstagio(ofestagio,StatusOfertaEstagio.APROVADO);
-		} catch (Exception e) {
+			this.ofertaEstagioCtrl.statusOfertaEstagio(ofestagio,StatusOfertaEstagio.APROVADO);
+		} catch (StaceException e) {
 			this.addErrorMessage(e.getMessage());
 		}
 		
 		return null;
 	}
 	
-	public String negarOfertaEstagio(OfertaEstagio ofestagio){
-		OfertaEstagioController  ofertaEstagioCtrl = new OfertaEstagioController();		
+	public String negarOfertaEstagio(OfertaEstagio ofestagio) throws Exception{
 		try {
-			ofertaEstagioCtrl.statusOfertaEstagio(ofestagio,StatusOfertaEstagio.NEGADO);
-		} catch (Exception e) {
+			this.ofertaEstagioCtrl.statusOfertaEstagio(ofestagio,StatusOfertaEstagio.NEGADO);
+		} catch (StaceException e) {
 			this.addErrorMessage(e.getMessage());
 		}
 		
+		return null;
+	}
+	
+	public String canceInscreverAluno(OfertaEstagio ofestagio) throws Exception{
+		try {
+			this.ofertaEstagioCtrl.canceInscreverAluno(ofestagio,(Aluno)loginBean.getUsuario());
+		} catch (StaceException e) {
+			this.addErrorMessage(e.getMessage());
+		}
 		return null;
 	}
 	

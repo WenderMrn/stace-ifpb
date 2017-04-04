@@ -45,21 +45,13 @@
 							    			<!-- ALUNO -->
 							    			<div class="col-md-offset-1 col-md-1">
 								    			<h:panelGroup rendered="#{not oferta.checkInscrito(loginBean.usuario.id)}">
-								    				<form>
-								    					<input type="hidden" name="op" value="inscanccalu"/>
-								    					<input type="hidden" name="oferta_estagio" value="#{oferta.id}" />
-								    					<button type="submit" class="btn btn-primary  btn-xs">Inscreva-se</button>
-								    				</form>	
+								    				<h:commandButton class="btn btn-primary  btn-xs" value="Inscrever-se" action="#{ofertaEstagioBean.canceInscreverAluno(oferta)}"/>
 								    			</h:panelGroup>
 								    		</div>
 								    		<!-- ALUNO -->
 								    		<div class="col-md-offset-1 col-md-2">	
 								    			<h:panelGroup rendered="#{oferta.checkInscrito(loginBean.usuario.id) and not oferta.checkSelecionado(loginBean.usuario)}">
-								    				<form>
-								    					<input type="hidden" name="op" value="inscanccalu"/>
-								    					<input type="hidden" name="oferta_estagio" value="#{oferta.id}" />
-								    					<button type="submit" class="btn btn-success btn-xs">Cancelar Inscrição</button>
-								    				</form>	
+								    				<h:commandButton class="btn btn-success btn-xs" value="Cancelar Inscrição" action="#{ofertaEstagioBean.canceInscreverAluno(oferta)}"/>	
 								    			</h:panelGroup>
 							    			</div>
 							    		</h:panelGroup>
