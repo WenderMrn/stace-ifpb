@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:body>
+	<ui:composition template="/template/_template.xhtml">
+		<ui:define name="ttitle">STACE - Estágio</ui:define>
+		<ui:define name="tbody">
+			<div class="jumbotron">
+				<div class="row">
+					<div class="panel-group" id="accordion">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<h3><h:graphicImage class="choose" library="images" name="lista.png"/> Estágios</h3>
+							<hr/>
+						</div>	
+					</div>
+					<ui:repeat value="#{facesContext.messageList}" var="facesMessage">
+						<!-- <h:outputFormat value="#{facesMessage.getSeverity()}"></h:outputFormat> -->
+			       		<div class="alert alert-#{facesMessage.getSeverity() == 'ERROR 2'?'danger':'info'} text-center">#{facesMessage.summary}</div>	
+			    	</ui:repeat>
+					<ui:repeat value="#{ofertaEstagioBean.ofertasEstagio}" var="estagio">
+							  <div class="panel panel-default">
+							    <div class="panel-heading">
+							    	<div class="row">
+							    		<div class="col-md-9">
+							    		<h4 class="panel-title">
+									        <a data-toggle="collapse" data-parent="#accordion" href="#accordion#{oferta.id}">
+									        	#{estagio.titulo}
+									        </a>
+									      </h4>
+							    		</div>
+							    	</div>
+							    </div>
+							    <div id="accordion#{oferta.id}" class="panel-collapse collapse in">
+							      <div class="panel-body">
+							      	<div class="row">
+							      		<div class="col-md-11">
+							      			<b>Função:</b> #{estagio.detalheFuncao}
+							      		</div>
+							      	</div>
+							      	<div class="row">
+							      		<div class="col-md-11">
+							      			<b>Requisitos:</b> #{estagio.requisitos}
+							      		</div>
+							      	</div>
+							      	<div class="row">
+							      		<div class="col-md-2">
+							      			<b>Valor da bolsa:</b> #{estagio.valorBolsa}
+							      		</div>
+							      		<div class="col-md-2">
+							      			<b>Valor Benefício:</b> #{estagio.valorBenef}
+							      		</div>
+							      		<div class="col-md-2">
+							      			<b>CH Semanais:</b> #{estagio.CHSemanais}
+							      		</div>
+							      		<div class="col-md-2">
+							      			<b>Vagas:</b> #{estagio.qtdeVaga}
+							      		</div>
+							      		<div class="col-md-2">
+							      			<b>Email Conato:</b> #{estagio.emailContato}
+							      		</div>
+							      	</div>
+							      </div>
+							    </div>
+							  </div>
+				        </ui:repeat>	
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

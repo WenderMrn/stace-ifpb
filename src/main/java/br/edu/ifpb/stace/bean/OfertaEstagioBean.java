@@ -10,10 +10,12 @@ import javax.faces.bean.ViewScoped;
 
 import br.edu.ifpb.stace.controllers.OfertaEstagioController;
 import br.edu.ifpb.stace.dao.EmpresaDAO;
+import br.edu.ifpb.stace.dao.EstagioDAO;
 import br.edu.ifpb.stace.dao.OfertaEstagioDAO;
 import br.edu.ifpb.stace.dao.PersistenceUtil;
 import br.edu.ifpb.stace.entity.Aluno;
 import br.edu.ifpb.stace.entity.Empresa;
+import br.edu.ifpb.stace.entity.Estagio;
 import br.edu.ifpb.stace.entity.OfertaEstagio;
 import br.edu.ifpb.stace.util.StaceException;
 import br.edu.ifpb.stace.util.StatusOfertaEstagio;
@@ -55,6 +57,12 @@ public class OfertaEstagioBean extends GenericBean{
 		OfertaEstagioDAO dao = new OfertaEstagioDAO(PersistenceUtil.getCurrentEntityManager());
 		List<OfertaEstagio> ofertas = dao.findAll();
 		return ofertas;
+	}
+	
+	public List<Estagio> getEstagios() {
+		EstagioDAO dao = new EstagioDAO();
+		List<Estagio> estagios = dao.findAll();
+		return estagios;
 	}
 	
 	public List<OfertaEstagio> getOfertasEstagio(String id) {

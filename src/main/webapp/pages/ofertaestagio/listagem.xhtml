@@ -25,7 +25,7 @@
 						</div>	
 					</div>
 					<h:form>	
-				        <ui:repeat value="#{ofertaEstagioBean.ofertasEstagio}" var="oferta">
+				        <ui:repeat value="#{ofertaEstagioBean.estagios}" var="oferta">
 						 	<h:panelGroup rendered="#{oferta.status eq 'APROVADO' or loginBean.perfil eq 'COORDENADOR'}">
 							  <div class="panel panel-default #{oferta.checkSelecionado(loginBean.usuario)?'candidato-selecionado':''}">
 							    <div class="panel-heading">
