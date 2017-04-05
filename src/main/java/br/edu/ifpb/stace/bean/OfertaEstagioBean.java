@@ -20,12 +20,11 @@ import br.edu.ifpb.stace.util.StatusOfertaEstagio;
 
 @ManagedBean
 @ViewScoped
-public class OfertaEstagioBean extends GenericBean implements Serializable{
-
-	private static final long serialVersionUID = 1L;
+public class OfertaEstagioBean extends GenericBean{
 	
 	@ManagedProperty(value="#{loginBean}")
 	private LoginBean loginBean;
+	
 	private OfertaEstagioController  ofertaEstagioCtrl;
 	
 	@PostConstruct
@@ -66,33 +65,48 @@ public class OfertaEstagioBean extends GenericBean implements Serializable{
 		return empresa.getOfertadasEstagio();
 	}
 	
-	public String aprovarOfertaEstagio(OfertaEstagio ofestagio) throws Exception{		
+	public String aprovarOfertaEstagio(OfertaEstagio ofestagio){		
 		try {
 			this.ofertaEstagioCtrl.statusOfertaEstagio(ofestagio,StatusOfertaEstagio.APROVADO);
-		} catch (StaceException e) {
+		} catch (Exception e) {
 			this.addErrorMessage(e.getMessage());
 		}
 		
 		return null;
 	}
 	
-	public String negarOfertaEstagio(OfertaEstagio ofestagio) throws Exception{
+	public String negarOfertaEstagio(OfertaEstagio ofestagio){
 		try {
 			this.ofertaEstagioCtrl.statusOfertaEstagio(ofestagio,StatusOfertaEstagio.NEGADO);
-		} catch (StaceException e) {
+		} catch (Exception e) {
 			this.addErrorMessage(e.getMessage());
 		}
 		
 		return null;
 	}
 	
-	public String canceInscreverAluno(OfertaEstagio ofestagio) throws Exception{
+	public String canceInscreverAluno(OfertaEstagio ofestagio){
 		try {
 			this.ofertaEstagioCtrl.canceInscreverAluno(ofestagio,(Aluno)loginBean.getUsuario());
-		} catch (StaceException e) {
+		} catch (Exception e) {
 			this.addErrorMessage(e.getMessage());
 		}
 		return null;
+	}
+	
+	public String selecionarAluno(OfertaEstagio ofertaEstagio,Aluno aluno){
+		try {
+			this.ofertaEstagioCtrl.selecionarAluno(ofertaEstagio,aluno);
+		} catch (Exception e) {
+			this.addErrorMessage(e.getMessage());
+		}
+		return null;
+	}
+	
+	public String novoEstagio(OfertaEstagio ofertaEstagio, Aluno candidato){
+		this.setFlash("OfertaEstagio", ofertaEstagio);
+		this.setFlash("Candidato", candidato);
+		return "/pages/estagio/cadastro?faces-redirect=true";
 	}
 	
 }

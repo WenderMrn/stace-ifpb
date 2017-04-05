@@ -86,38 +86,17 @@ public class OfertaEstagioController {
 		
 	}
 	
-public Resultado selecionarAluno(Map<String, String[]> parametros){
+public void selecionarAluno(OfertaEstagio ofertaEstagio,Aluno aluno) throws Exception{
 		
-		Resultado resultado= new Resultado();
-		OfertaEstagio ofertaEstagio = null;
-		
-		IValidatorFactory vf = new ConcretValidatorFactory(); 
-		
-		IValidator validador = null;
-		try {
-			validador = vf.getValidatorType(ValidatorType.SELECIONAR_ALUNO);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			return null;
-		}
-		
-		if(validador.isValidParameters(parametros)){
-			
-			ofertaEstagio = (OfertaEstagio)validador.getResultado().getEntidade();
-		}
-		
-		if(ofertaEstagio == null){
-			resultado.setErro(true);
-			resultado.setMensagens(validador.getResultado().getMensagens());
-		}else{
-			resultado.setMensagens(validador.getResultado().getMensagens());
+		if(ofertaEstagio != null && aluno != null){
+			ofertaEstagio.addSelecionado(aluno);
 			OfertaEstagioDAO dao = new OfertaEstagioDAO(PersistenceUtil.getCurrentEntityManager());
 			dao.beginTransaction();
 			dao.update(ofertaEstagio);
 			dao.commit();
+		}else{
+			throw new StaceException("Oferta de Estágio e/ou Aluno não informada(os)!");
 		}
-		
-		return resultado;
 		
 	}
 }

@@ -171,7 +171,7 @@ public class FrontControllerServlet extends HttpServlet {
 		break;
 		case "cadest":
 			redirect = false;
-			resultado= estagioCtrl.cadastrar(request.getParameterMap());
+			//resultado= estagioCtrl.cadastrar(request.getParameterMap());
 			if(!resultado.isErro()) {
 				proxPagina = "pages/estagio/cadastro.jsp";
 				request.setAttribute("msgs", resultado.getMensagens());
@@ -229,12 +229,12 @@ public class FrontControllerServlet extends HttpServlet {
 			redirect = true;
 			proxPagina = "pages/ofertaestagio/gerencia.jsp";
 			resultado =  new Resultado();
-			try {
+			/*try {
 				resultado = ofertaEstagioCtrl.selecionarAluno(request.getParameterMap());
 			} catch (Exception e) {
 				
 				e.printStackTrace();
-			}
+			}*/
 			proxPagina= "pages/ofertaestagio/gerencia.jsp";
 			redirect = false;
 			if(!resultado.isErro()) {
@@ -252,12 +252,12 @@ public class FrontControllerServlet extends HttpServlet {
 			redirect = true;
 			proxPagina = "pages/estagio/cadastro.jsp";
 			resultado =  new Resultado();
-			try {
+			/*try {
 				resultado = estagioCtrl.cadastrarByOferta(request.getParameterMap());
 			} catch (Exception e) {
 				
 				e.printStackTrace();
-			}
+			}*/
 			redirect = false;
 			if(!resultado.isErro()) {
 				

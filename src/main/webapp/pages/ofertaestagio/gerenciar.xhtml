@@ -19,125 +19,125 @@
 			<div class="jumbotron">
 				<div class="row">
 					<div class="col-md-12 text-center">
-						<h3>Ofertas de Estágio</h3>
+						<h3><h:graphicImage class="choose" library="images" name="lista.png"/>Ofertas de Estágio</h3>
 						<hr/>
 						<h6>Veja os candidatos as vagas de estágios listados abaixo</h6>
 					</div>	
 				</div>
-				<h:messages style="margin:auto" infoStyle="color:blue" errorStyle="color:red" layout="table" />
+				<ui:repeat value="#{facesContext.messageList}" var="facesMessage">
+			       	<div class="alert alert-#{facesMessage.getSeverity() == 'ERROR 2'?'danger':'info'} text-center">#{facesMessage.summary}</div>	
+			    </ui:repeat>
 				<div class="row">
 					<div class="panel-group" id="accordion">
-					<ui:repeat value="#{ofertaEstagioBean.getOfertasEstagio(loginBean.usuario)}" var="oferta">
-						  <div class="panel panel-default}">
-						    <div class="panel-heading">
-						    	<div class="row">
-						    		<div class="col-md-10">
-						    		<h4 class="panel-title">
-								        <a data-toggle="collapse" data-parent="#accordion" href="#accordion#{oferta.id}">
-								        	${oferta.titulo}
-								        </a>
-								      </h4>
-						    		</div>
-						    		<c:if test="#{oferta.status eq 'AGUARDANDO'}">
-								    	<div class="col-md-2">
-								    		<a class="btn btn-warning btn-xs disabled"><i class="glyphicon glyphicon-time"></i> Em Análise</a>
-								    	</div>
-							    	</c:if>
-							    	<c:if test="#{oferta.status eq 'NEGADO'}">
-								    	<div class="col-md-2">
-								    		<a class="btn btn-danger btn-xs disabled">Negado</a>
-								    	</div>
-							    	</c:if>		
-							    	<c:if test="#{oferta.status eq 'APROVADO'}">
-							    		<div class="col-md-2">
-							    			 <a class="btn btn-success btn-xs">
-							    			 	<i class="glyphicon glyphicon-pencil"></i> Inscritos #{oferta.candidatos.size()}
-							    			 </a>
+					<h:form id="gerenciar-oferta-form">
+						<ui:repeat value="#{ofertaEstagioBean.getOfertasEstagio(loginBean.usuario)}" var="oferta">
+							  <div class="panel panel-default">
+							    <div class="panel-heading">
+							    	<div class="row">
+							    		<div class="col-md-10">
+							    		<h4 class="panel-title">
+									        <a data-toggle="collapse" data-parent="#accordion" href="#accordion#{oferta.id}">
+									        	#{oferta.titulo}
+									        </a>
+									      </h4>
 							    		</div>
-						    		</c:if>
-						    	</div>
-						    </div>
-						    <div id="accordion#{oferta.id}" class="panel-collapse collapse in">
-						      <div class="panel-body">
-						      	<div class="row">
-						      		<div class="col-md-11">
-						      			<b>Função:</b> #{oferta.detalheFuncao}
-						      		</div>
-						      	</div>
-						      	<div class="row">
-						      		<div class="col-md-11">
-						      			<b>Requisitos:</b> #{oferta.requisitos}
-						      		</div>
-						      	</div>
-						      	<div class="row">
-						      		<div class="col-md-2">
-						      			<b>Valor da bolsa:</b> #{oferta.valorBolsa}
-						      		</div>
-						      		<div class="col-md-2">
-						      			<b>Valor Benefício:</b> #{oferta.valorBenef}
-						      		</div>
-						      		<div class="col-md-2">
-						      			<b>CH Semanais:</b> #{oferta.CHSemanais}
-						      		</div>
-						      		<div class="col-md-2">
-						      			<b>Vagas:</b> #{oferta.qtdeVaga}
-						      		</div>
-						      		<div class="col-md-2">
-						      			<b>Email Conato:</b> #{oferta.emailContato}
-						      		</div>
-						      	</div>
-						      	<br/>
-						      	<c:if test="#{oferta.candidatos.size() gt 0}">
+							    		<h:panelGroup rendered="#{oferta.status eq 'AGUARDANDO'}">
+									    	<div class="col-md-2">
+									    		<a class="btn btn-warning btn-xs disabled"><i class="glyphicon glyphicon-time"></i> Em Análise</a>
+									    	</div>
+								    	</h:panelGroup>
+								    	<h:panelGroup rendered="#{oferta.status eq 'NEGADO'}">
+									    	<div class="col-md-2">
+									    		<a class="btn btn-danger btn-xs disabled"><i class="glyphicon glyphicon-ban-circle"></i> Negado</a>
+									    	</div>
+								    	</h:panelGroup>		
+								    	<h:panelGroup rendered="#{oferta.status eq 'APROVADO'}">
+								    		<div class="col-md-2">
+								    			 <a class="btn btn-success btn-xs">
+								    			 	<i class="glyphicon glyphicon-pencil"></i> Inscritos #{oferta.candidatos.size()}
+								    			 </a>
+								    		</div>
+							    		</h:panelGroup>
+							    	</div>
+							    </div>
+							    <div id="accordion#{oferta.id}" class="panel-collapse collapse in">
+							      <div class="panel-body">
 							      	<div class="row">
-							      		<div class="col-md-12">
-							      			<b>Condidatos Inscritos</b>
+							      		<div class="col-md-11">
+							      			<b>Função:</b> #{oferta.detalheFuncao}
 							      		</div>
-							      		<hr />
 							      	</div>
-						      	</c:if>
-						      	<ui:repeat value="#{oferta.candidatos}" var="candidato"> 
-								      <div class="row">
-									      <div class="col-md-3">
-										      <b>Nome:</b> #{candidato.nome}
-									      </div>
-									      <div class="col-md-3">
-										      <b>Matrícula:</b> #{candidato.matricula}
-									      </div>
-									       <div class="col-md-offset-2 col-md-4">
-									       	<div class="col-md-3">
-										      	<button type="submit" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-user"></i> Ver</button>
-										      </div>
-										      <c:if test="#{not oferta.checkSelecionado(candidato)}">	
-											      <div class="col-md-5">
-												      <form>
-												      	<input type="hidden" name="op" value="selalu"/>
-												      	<input type="hidden" name="candidato" value="#{candidato.id}"/>
-												      	<input type="hidden" name="oferta" value="#{oferta.id}"/>
-												      	<button type="submit" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-plus-sign"></i> selecionar</button>
-												     </form>
-											      </div>
-										      </c:if>
-										      <c:if test="#{oferta.checkSelecionado(candidato)}">
-											      <div class="col-md-2">
-												      	<button type="button" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-ok-sign"></i> selecionado</button>
-											      </div>
-											      <div class="col-md-offset-2 col-md-2">
-											      	<form >
-											      		<input type="hidden" name="op" value="novoest"/>
-											      		<input type="hidden" name="candidato" value="#{candidato.id}"/>
-												      	<input type="hidden" name="oferta" value="#{oferta.id}"/>
-												      	<button type="submit" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-lock"></i> Novo Estágio</button>
-											      	</form>
-											      </div>
-											 </c:if>
-									       </div>
+							      	<div class="row">
+							      		<div class="col-md-11">
+							      			<b>Requisitos:</b> #{oferta.requisitos}
+							      		</div>
+							      	</div>
+							      	<div class="row">
+							      		<div class="col-md-2">
+							      			<b>Valor da bolsa:</b> #{oferta.valorBolsa}
+							      		</div>
+							      		<div class="col-md-2">
+							      			<b>Valor Benefício:</b> #{oferta.valorBenef}
+							      		</div>
+							      		<div class="col-md-2">
+							      			<b>CH Semanais:</b> #{oferta.CHSemanais}
+							      		</div>
+							      		<div class="col-md-2">
+							      			<b>Vagas:</b> #{oferta.qtdeVaga}
+							      		</div>
+							      		<div class="col-md-2">
+							      			<b>Email Conato:</b> #{oferta.emailContato}
+							      		</div>
+							      	</div>
+							      	<br/>
+							      	<c:if test="#{oferta.candidatos.size() gt 0}">
+								      	<div class="row">
+								      		<div class="col-md-12">
+								      			<b>Condidatos Inscritos</b>
+								      		</div>
+								      		<hr />
 								      	</div>
-						      		<hr />
-						      	</ui:repeat>
-						      </div>
-						    </div>
-						  </div>
-						</ui:repeat>
+							      	</c:if>
+							      	<ui:repeat value="#{oferta.candidatos}" var="candidato"> 
+							      		<h:panelGroup rendered="#{!candidato.estagiando}">
+										      <div class="row">
+											      <div class="col-md-3">
+												      <b>Nome:</b> #{candidato.nome}
+											      </div>
+											      <div class="col-md-3">
+												      <b>Matrícula:</b> #{candidato.matricula}
+											      </div>
+											       <div class="col-md-offset-2 col-md-4">
+											       	<div class="col-md-4">
+												      	<button type="submit" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-user"></i> informações</button>
+												      </div>
+												     <h:panelGroup rendered="#{not oferta.checkSelecionado(candidato)}">	
+													      <div class="col-md-5">
+														      <h:commandLink class="btn btn-info btn-xs" value='selecionar' action="#{ofertaEstagioBean.selecionarAluno(oferta,candidato)}">
+														      	<i class="glyphicon glyphicon-plus-sign"/>
+														      </h:commandLink>
+													      </div>
+												      </h:panelGroup>
+												      <h:panelGroup rendered="#{oferta.checkSelecionado(candidato)}">
+													      <div class="col-md-2">
+														      	<button type="button" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-ok-sign"></i> selecionado</button>
+													      </div>
+													      <div class="col-md-offset-2 col-md-2">
+													      	<h:commandLink class="btn btn-warning btn-xs" value=" Novo Estágio" action="#{ofertaEstagioBean.novoEstagio(oferta,candidato)}">
+													      		<i class="glyphicon glyphicon-lock"></i>
+													      	</h:commandLink>
+													      </div>
+													 </h:panelGroup>
+											       </div>
+									      		</div>
+									      		<hr />
+									      	</h:panelGroup>
+							      	</ui:repeat>
+							      </div>
+							    </div>
+							  </div>
+							</ui:repeat>
+						</h:form>	
 					</div>	
 				</div>
 			</div>

@@ -109,6 +109,7 @@ public abstract class GenericBean {
 	}
 	
 	public void setFlash(String nome, Object valor) {
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().keep(nome);
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().put(nome, valor);
 	}
 	

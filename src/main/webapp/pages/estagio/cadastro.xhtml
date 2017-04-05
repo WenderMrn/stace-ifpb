@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	
+<h:head>
+	<title>Cadastro de Estágio</title>
+</h:head>
+<h:body>
+	<ui:composition template="/template/_template.xhtml">
+		<ui:define name="ttitle">Novo Estágio</ui:define>
+		<ui:define name="tbody">
+			<div class="jumbotron">
+				<div class="row">
+					<div class="panel-group" id="accordion">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<h3><h:graphicImage class="choose" library="images" name="lista.png"/> Estágio</h3>
+							<hr/>
+						</div>	
+					</div>
+					<ui:repeat value="#{facesContext.messageList}" var="facesMessage">
+						<!-- <h:outputFormat value="#{facesMessage.getSeverity()}"></h:outputFormat> -->
+			       		<div class="alert alert-#{facesMessage.getSeverity() == 'ERROR 2'?'danger':'info'} text-center">#{facesMessage.summary}</div>	
+			    	</ui:repeat>
+					<h:panelGroup rendered="#{not empty estagioBean.candidatoEstagio}">
+						<div class="row">
+							<div class="row">
+								<div class="col-md-12 text-center">
+									<h5>Informações do Aluno</h5>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-offset-3 col-md-4"><b>Nome: </b> #{estagioBean.candidatoEstagio.nome}</div>
+								<div class="col-sm-offset-3 col-md-4"><b>Matrícula: </b> #{estagioBean.candidatoEstagio.matricula}</div>
+							</div>
+							<div class="row">
+								<div class=" col-sm-offset-3 col-md-4"><b>Email: </b> #{estagioBean.candidatoEstagio.email}</div>
+								<div class=" col-sm-offset-3 col-md-4"><b>Telefone: </b> #{estagioBean.candidatoEstagio.telefone}</div>
+							</div>
+						</div>
+						<hr />
+					</h:panelGroup>		
+				<div class="row">
+					<h:form id="cadastro-estagio-form">
+						<div class="row">	
+						  <div class="form-group col-sm-offset-3 col-md-6">
+						    <label for="titulo">Título</label>
+						    <h:inputText id="titulo" name="titulo" value="#{estagioBean.ofertaEstagio.titulo}" class="form-control" pt:placeholder="Título"/>
+						  </div>
+						 </div> 
+						<div class="row">
+						  <div class="form-group col-sm-offset-3 col-md-6">
+						    <label for="cargosetor">Cargo ou Setor</label>
+						    <h:inputText id="cargosetor" name="cargosetor" value="#{estagioBean.estagio.setor}" class="form-control" pt:placeholder="Cargo ou Setor"/>
+						  </div>
+					  	</div>
+					  	<div class="row">
+						  <div class="form-group col-sm-offset-3 col-md-6">
+						    <label for="detalhefuncao">Detalhe Função</label>
+						    <h:inputTextarea id="detalhefuncao" name="detalhefuncao" value="#{estagioBean.ofertaEstagio.detalheFuncao}" rows="3" class="form-control" pt:placeholder="Detalhe função"/>
+						  </div>
+					  	</div>
+					  	<div class="row">
+						  <div class="form-group col-sm-offset-3 col-md-6">
+						    <label for="chsemanais">Carga Horária Semanais(em horas)</label>
+						    <h:inputText id="chsemanais" name="chsemanais" value="#{estagioBean.ofertaEstagio.CHSemanais}" class="form-control" pt:placeholder="Carga Horária Semanais"/>
+						  </div>
+					  	</div>
+					  	<div class="row">
+						  <div class="form-group col-sm-offset-3 col-md-6">
+						    <label for="horario">Horário do estágio</label>
+						    <h:inputText id="horario" name="horario" value="#{estagioBean.estagio.horario}" class="form-control" pt:placeholder="Horário do estágio"/>
+						  </div>
+					  	</div>
+					  	<div class="row">
+						  <div class="form-group col-sm-offset-3 col-md-6">
+						    <label for="valorbolsa">Valor da Bolsa</label>
+						    <h:inputText id="valorbolsa" name="valorbolsa" value="#{estagioBean.ofertaEstagio.valorBolsa}" class="form-control" pt:placeholder="Valor da Bolsa"/>
+						  </div>
+					  	</div>
+					  	<div class="row">
+						  <div class="form-group col-sm-offset-3 col-md-6">
+						    <label for="valorbene">Valor do Benefício</label>
+						    <h:inputText id="valorbene" name="valorbene" value="#{estagioBean.ofertaEstagio.valorBenef}" class="form-control" pt:placeholder="Valor do benefício"/>
+						  </div>
+					  	</div>
+					  	<div class="row">
+						  <div class="form-group col-sm-offset-3 col-md-6">
+						    <label for="inicioestagio">Início do Estágio</label>
+						    <h:inputText id="inicioestagio" name="inicioestagio" value="#{estagioBean.estagio.DInicio}" class="form-control" pt:placeholder="Início do Estágio">
+						    	<f:convertDateTime pattern="dd/MM/yyyy" />
+						    </h:inputText>
+						  </div>
+					  	</div>
+					  	<div class="row">
+						  <div class="form-group col-sm-offset-3 col-md-6">
+						    <label for="fimestagio">Término do Estágio</label>
+						    <h:inputText id="fimestagio" name="fimestagio" value="#{estagioBean.estagio.DFim}" class="form-control" pt:placeholder="Término do Estágio">
+						    	<f:convertDateTime pattern="dd/MM/yyyy" />
+						    </h:inputText>
+						  </div>
+					  	</div>
+					  	<div class="row">
+						  <div class="form-group col-sm-offset-3 col-md-6">
+						    <label for="supervisor">Supevisor</label>
+						    <h:inputText id="supervisor" name="supervisor" value="#{estagioBean.estagio.supervisor}" class="form-control" pt:placeholder="Supervisor"/>
+						  </div>
+					  	</div>
+					  	<div class="row">
+						  <div class="form-group col-sm-offset-3 col-md-6">
+						    <label for="infoadicionais">Informações Adicionais</label>
+						    <h:inputTextarea id="infoadicionais" name="infoadicionais" value="#{estagioBean.ofertaEstagio.infoAdicionais}" rows="3" class="form-control" pt:placeholder="Detalhe função"/>
+						  </div>
+					  	</div>
+					  	<div class="row">
+					  		<div class="col-sm-offset-3">
+					  			<h:commandButton id="salvarEstagio" class="btn btn-default" value="Salvar" action="#{estagioBean.salvarEstagio}"/>
+					  		</div>
+				  		</div>
+				  		</h:form>
+						</div>	
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -49,15 +49,15 @@ public class LoginBean extends GenericBean implements Serializable{
 			LoginController loginCtrl = new LoginController();	
 			this.usuario = loginCtrl.autenticar(this.usuario);
 			
+			resultado = "/pages/ofertaestagio/listagem.jsf?faces-redirect=true";
 			if(this.usuario instanceof Aluno){
 				this.perfil = "ALUNO";
 			}else if(this.usuario instanceof Empresa){
 				this.perfil = "EMPRESA";
+				resultado = "/pages/ofertaestagio/gerenciar.jsf?faces-redirect=true";
 			}else if(this.usuario instanceof Coordenador){
 				this.perfil = "COORDENADOR";
 			}
-			
-			resultado = "/pages/ofertaestagio/listagem.jsf?faces-redirect=true";
 			
 		} catch (StaceException e) {
 			this.addErrorMessage(e.getMessage());
