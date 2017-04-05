@@ -152,12 +152,12 @@ public class FrontControllerServlet extends HttpServlet {
 			
 			redirect = false;
 			
-			try {
+			/*try {
 				resultado = ofertaEstagioCtrl.cadastrar(request.getParameterMap(),(Empresa)usuario);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			if(!resultado.isErro()) {
 				proxPagina = "pages/ofertaestagio/cadastro.jsp";
 				request.setAttribute("msgs", resultado.getMensagens());

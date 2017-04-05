@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	
+<h:body>
+	<ui:composition template="/template/_template.xhtml">
+		<ui:define name="ttitle">STACE - Oferta de Estágio</ui:define>
+		<ui:define name="tbody">
+			<div class="jumbotron">
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<h3><h:graphicImage class="choose" library="images" name="lista.png"/> Nova Ofertas de Estágio</h3>
+						<hr/>
+					</div>	
+				</div>
+				<ui:repeat value="#{facesContext.messageList}" var="facesMessage">
+			       	<div class="alert alert-#{facesMessage.getSeverity() == 'ERROR 2'?'danger':'info'} text-center">#{facesMessage.summary}</div>	
+			    </ui:repeat>
+			    <div class="row">
+					<h:form id="cadastro-estagio-form">
+						<div class="row">	
+						  <div class="form-group col-sm-offset-3 col-md-6">
+						    <label for="titulo">Título</label>
+						    <h:inputText id="titulo" name="titulo" value="#{ofertaEstagioBean.ofertaEstagio.titulo}" class="form-control" pt:placeholder="Título"/>
+						  </div>
+						 </div> 
+					  	<div class="row">
+						  <div class="form-group col-sm-offset-3 col-md-6">
+						    <label for="detalhefuncao">Detalhe Função</label>
+						    <h:inputTextarea id="detalhefuncao" name="detalhefuncao" value="#{ofertaEstagioBean.ofertaEstagio.detalheFuncao}" rows="3" class="form-control" pt:placeholder="Detalhe função"/>
+						  </div>
+					  	</div>
+					  	<div class="row">
+						  <div class="form-group col-sm-offset-3 col-md-6">
+						    <label for="chsemanais">Carga Horária Semanais(em horas)</label>
+						    <h:inputText id="chsemanais" name="chsemanais" value="#{ofertaEstagioBean.ofertaEstagio.CHSemanais}" class="form-control" pt:placeholder="Carga Horária Semanais"/>
+						  </div>
+					  	</div>
+					  	<div class="row">
+						  <div class="form-group col-sm-offset-3 col-md-6">
+						    <label for="valorbolsa">Valor da Bolsa</label>
+						    <h:inputText id="valorbolsa" name="valorbolsa" value="#{ofertaEstagioBean.ofertaEstagio.valorBolsa}" class="form-control" pt:placeholder="Valor da Bolsa"/>
+						  </div>
+					  	</div>
+					  	<div class="row">
+						  <div class="form-group col-sm-offset-3 col-md-6">
+						    <label for="valorbene">Valor do Benefício</label>
+						    <h:inputText id="valorbene" name="valorbene" value="#{ofertaEstagioBean.ofertaEstagio.valorBenef}" class="form-control" pt:placeholder="Valor do benefício"/>
+						  </div>
+					  	</div>
+					  	<div class="row">
+						  <div class="form-group col-sm-offset-3 col-md-6">
+						    <label for="infoadicionais">Informações Adicionais</label>
+						    <h:inputTextarea id="infoadicionais" name="infoadicionais" value="#{ofertaEstagioBean.ofertaEstagio.infoAdicionais}" rows="3" class="form-control" pt:placeholder="Detalhe função"/>
+						  </div>
+					  	</div>
+					  	<div class="row">
+					  		<div class="col-sm-offset-3">
+					  			<h:commandButton id="salvarEstagio" class="btn btn-default" value="Salvar" action="#{ofertaEstagioBean.novaOfertaEstagio}"/>
+					  		</div>
+				  		</div>
+				  	</h:form>
+				</div>
+			 </div>
+		</ui:define>	
+	</ui:composition>
+</h:body>
+</html>

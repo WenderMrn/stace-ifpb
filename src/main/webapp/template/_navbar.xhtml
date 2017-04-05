@@ -33,8 +33,8 @@
 		      	</c:if>
 	      	</li>
 	      	<li>
-		      	<c:if test="#{loginBean.perfil eq 'COORDENADOR'}">
-		      		<h:commandLink action="/pages/empresa/gerenciar?faces-redirect=true">Empresas</h:commandLink>
+		      	<c:if test="#{loginBean.perfil eq 'EMPRESA'}">
+		      		<h:commandLink action="/pages/ofertaestagio/cadastro?faces-redirect=true">Cadastrar Oferta</h:commandLink>
 		      	</c:if>
 	      	</li>
 	       <!--  <li><a href="#">Link</a></li>

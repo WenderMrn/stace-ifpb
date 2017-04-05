@@ -26,10 +26,12 @@ public class OfertaEstagioBean extends GenericBean{
 	private LoginBean loginBean;
 	
 	private OfertaEstagioController  ofertaEstagioCtrl;
+	private OfertaEstagio ofertaEstagio;
 	
 	@PostConstruct
 	public void init(){
 		this.ofertaEstagioCtrl = new OfertaEstagioController();
+		this.ofertaEstagio = new OfertaEstagio();
 	}
 	
 	
@@ -39,6 +41,14 @@ public class OfertaEstagioBean extends GenericBean{
 
 	public void setLoginBean(LoginBean loginBean) {
 		this.loginBean = loginBean;
+	}
+	
+	public OfertaEstagio getOfertaEstagio() {
+		return ofertaEstagio;
+	}
+
+	public void setOfertaEstagio(OfertaEstagio ofertaEstagio) {
+		this.ofertaEstagio = ofertaEstagio;
 	}
 
 	public List<OfertaEstagio> getOfertasEstagio() {
@@ -107,6 +117,17 @@ public class OfertaEstagioBean extends GenericBean{
 		this.setFlash("OfertaEstagio", ofertaEstagio);
 		this.setFlash("Candidato", candidato);
 		return "/pages/estagio/cadastro?faces-redirect=true";
+	}
+	
+	public String novaOfertaEstagio(){
+		try {
+			ofertaEstagioCtrl.cadastrar(this.ofertaEstagio,(Empresa)this.loginBean.getUsuario());
+			this.addSuccessMessage("Oferta Cadastrada com sucesso! Aguardando aprovação do Coordenador.");
+			this.init();
+		} catch (Exception e) {
+			this.addErrorMessage(e.getMessage());
+		}
+		return null;
 	}
 	
 }
