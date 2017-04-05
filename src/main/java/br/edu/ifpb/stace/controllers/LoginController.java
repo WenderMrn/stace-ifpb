@@ -17,9 +17,9 @@ public class LoginController {
 		
 		if (p != null) {
 			if (p.getSenha().equals(PasswordUtil.encryptMD5(passwd))) {
-				/*if(!p.isAprovado()){
+				if(!p.isAprovado()){
 					throw new StaceException("Usuário aguardando aprovação!");
-				}*/
+				}
 			} else {
 				throw new StaceException("Usuário ou senha inválido(a).");
 			}

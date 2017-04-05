@@ -12,6 +12,7 @@ import br.edu.ifpb.stace.dao.EmpresaDAO;
 import br.edu.ifpb.stace.dao.PersistenceUtil;
 import br.edu.ifpb.stace.dao.PessoaDAO;
 import br.edu.ifpb.stace.entity.Empresa;
+import br.edu.ifpb.stace.util.PasswordUtil;
 
 @ManagedBean
 @ViewScoped
@@ -67,13 +68,15 @@ public class EmpresaBean extends GenericBean{
 	
 	public String registarEmpresa(){
 		String resultado = null;
-		if(this.empresa.getSenha().equals(this.confSenha)){
+		if(!this.empresa.getSenha().equals(this.confSenha)){
 			this.addErrorMessage("As senhas não correspondem.");
 		}else{
 			this.empresaDao.beginTransaction();
+			this.empresa.setSenha(PasswordUtil.encryptMD5(this.empresa.getSenha()));
 			this.empresaDao.insert(this.empresa);
 			this.empresaDao.commit();
-			resultado = "/pages/ofertaestagio/gerenciar?faces-redict=true";
+			this.addSuccessMessage("Empresa cadastrada com sucesso!Aguarde a liberação  da sua conta.");
+			resultado = "/pages/login/login?faces-redict=true";
 		}
 		
 		return resultado;

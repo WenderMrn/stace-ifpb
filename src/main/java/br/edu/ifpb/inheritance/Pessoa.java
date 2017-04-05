@@ -26,7 +26,7 @@ public class Pessoa{
 	private String telefone;
 	
 	@Column(name="APROVADO")
-	private boolean aprovado = true;
+	private boolean aprovado = false;
 	
 	public Integer getId() {
 		return id;
