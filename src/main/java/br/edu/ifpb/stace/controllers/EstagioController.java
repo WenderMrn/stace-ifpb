@@ -32,14 +32,29 @@ public class EstagioController {
 	}
 	
 	public Estagio cadastrar(Estagio contexto,OfertaEstagio ofertaEstagio, Aluno candidato,Empresa empresa) throws StaceException{
-		
+		OfertaEstagioDAO ofertaDao = new OfertaEstagioDAO();
 		Estagio estagio = contexto != null?contexto:new Estagio();
-		
+		List<OfertaEstagio> listaOfertasEstaio = null; 
 		if(ofertaEstagio == null || candidato == null || empresa == null)
 				throw new StaceException("Oferta de Estágio, Candidatos e Empresa são obrigatórios.");
 		
+		OfertaEstagioDAO ofertaEstagioDAO = new OfertaEstagioDAO();
+		listaOfertasEstaio = ofertaEstagioDAO.findAll();
+		
+		for (OfertaEstagio oferta : listaOfertasEstaio) {
+			if(!oferta.equals(ofertaEstagio)){
+				
+				oferta.removeCanditato(candidato);
+				oferta.removerSelecionado(candidato);
+				
+				ofertaDao.beginTransaction();
+				ofertaDao.update(oferta);
+				ofertaDao.commit();
+				
+			}
+		}
+		
 		candidato.setEstagiando(true);
-		ofertaEstagio.removeCanditato(candidato);
 		
 		estagio.setAluno(candidato);
 		estagio.setCHSemanais(ofertaEstagio.getCHSemanais());

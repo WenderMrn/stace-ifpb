@@ -9,12 +9,9 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 	
-<h:head>
-	<title>Oferta de Estágio</title>
-</h:head>
 <h:body>
 	<ui:composition template="/template/_template.xhtml">
-		<ui:define name="ttitle">Oferta de Estágio</ui:define>
+		<ui:define name="ttitle">STACE - Oferta de Estágio</ui:define>
 		<ui:define name="tbody">
 			<div class="jumbotron">
 				<div class="row">
@@ -53,7 +50,7 @@
 								    	</h:panelGroup>		
 								    	<h:panelGroup rendered="#{oferta.status eq 'APROVADO'}">
 								    		<div class="col-md-2">
-								    			 <a class="btn btn-success btn-xs">
+								    			 <a class="btn btn-default btn-xs">
 								    			 	<i class="glyphicon glyphicon-pencil"></i> Inscritos #{oferta.candidatos.size()}
 								    			 </a>
 								    		</div>
@@ -90,16 +87,16 @@
 							      		</div>
 							      	</div>
 							      	<br/>
-							      	<c:if test="#{oferta.candidatos.size() gt 0}">
+							      <h:panelGroup rendered="#{oferta.candidatos.size() gt 0}">
 								      	<div class="row">
 								      		<div class="col-md-12">
-								      			<b>Condidatos Inscritos</b>
+								      			<h4><b>Relação de Candidatos e Estagiários</b></h4>
 								      		</div>
-								      		<hr />
 								      	</div>
-							      	</c:if>
+								      	<hr />
+							      	</h:panelGroup>
 							      	<ui:repeat value="#{oferta.candidatos}" var="candidato"> 
-							      		<h:panelGroup rendered="#{!candidato.estagiando}">
+							      		
 										      <div class="row">
 											      <div class="col-md-3">
 												      <b>Nome:</b> #{candidato.nome}
@@ -111,27 +108,35 @@
 											       	<div class="col-md-4">
 												      	<button type="submit" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-user"></i> informações</button>
 												      </div>
-												     <h:panelGroup rendered="#{not oferta.checkSelecionado(candidato)}">	
-													      <div class="col-md-5">
+												      <span></span>		
+												     <h:panelGroup rendered="#{not oferta.checkSelecionado(candidato) and not candidato.estagiando}">	
+													      <div class="col-md-4">
 														      <h:commandLink class="btn btn-info btn-xs" value='selecionar' action="#{ofertaEstagioBean.selecionarAluno(oferta,candidato)}">
 														      	<i class="glyphicon glyphicon-plus-sign"/>
 														      </h:commandLink>
 													      </div>
 												      </h:panelGroup>
-												      <h:panelGroup rendered="#{oferta.checkSelecionado(candidato)}">
+												      <h:panelGroup rendered="#{oferta.checkSelecionado(candidato) and not candidato.estagiando}">
 													      <div class="col-md-2">
 														      	<button type="button" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-ok-sign"></i> selecionado</button>
 													      </div>
-													      <div class="col-md-offset-2 col-md-2">
-													      	<h:commandLink class="btn btn-warning btn-xs" value=" Novo Estágio" action="#{ofertaEstagioBean.novoEstagio(oferta,candidato)}">
-													      		<i class="glyphicon glyphicon-lock"></i>
-													      	</h:commandLink>
+													      <div class="col-md-offset-1 col-md-2">
+														   	<h:commandLink class="btn btn-warning btn-xs" value="Novo Estágio" action="#{ofertaEstagioBean.novoEstagio(oferta,candidato)}">
+														   		<i class="glyphicon glyphicon-lock"></i>
+														   	</h:commandLink>
 													      </div>
+													 </h:panelGroup>
+													 <h:panelGroup rendered="#{candidato.estagiando}">
+													 	<div class="col-md-offset-1 col-md-2">
+														 	<h:commandLink class="btn btn-success btn-xs" value="Estagiando">
+														      		<i class="glyphicon glyphicon glyphicon-briefcase"></i>
+														    </h:commandLink>
+													    </div>
 													 </h:panelGroup>
 											       </div>
 									      		</div>
 									      		<hr />
-									      	</h:panelGroup>
+									      	
 							      	</ui:repeat>
 							      </div>
 							    </div>

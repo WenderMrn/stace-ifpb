@@ -190,7 +190,7 @@ public class OfertaEstagio extends AbstractEstagio {
 		this.estagios = estagios;
 	}
 	
-	public Boolean checkInscrito(String id){
+	public boolean checkInscrito(String id){
 		Integer idNumerico= null;
 		try{
 			idNumerico = Integer.parseInt(id);

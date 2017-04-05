@@ -150,17 +150,17 @@ public class InsereDadosBanco {
 		/* Empresa */
 		Empresa emp1 = new Empresa();
 		emp1.setCnpj("12346546456");
-		emp1.setCodAtividadeEcoPric("213213");
+		//emp1.setCodAtividadeEcoPric("213213");
 		emp1.setDescAtividadeEcoPric("Consultoria em ADM");
 		emp1.setEmail("empresa1@email.com");
 		emp1.setSenha(PasswordUtil.encryptMD5("123"));
 		emp1.setNomeEmpresarial("Severino Silva Souza");
-		emp1.setNomeFantasia("ADM & CIA");
+		emp1.setNomeFantasia("ADM Money");
 		emp1.setAprovado(false);
 
 		Empresa emp2 = new Empresa();
 		emp2.setCnpj("1234612121");
-		emp2.setCodAtividadeEcoPric("213212");
+		//emp2.setCodAtividadeEcoPric("213212");
 		emp2.setDescAtividadeEcoPric("Construção Civil");
 		emp2.setEmail("empresa2@email.com");
 		emp2.setSenha(PasswordUtil.encryptMD5("123"));
@@ -170,12 +170,12 @@ public class InsereDadosBanco {
 		
 		Empresa emp3 = new Empresa();
 		emp3.setCnpj("1234612121");
-		emp3.setCodAtividadeEcoPric("213212");
-		emp3.setDescAtividadeEcoPric("Construção Civil");
+		//emp3.setCodAtividadeEcoPric("213212");
+		emp3.setDescAtividadeEcoPric("Software House");
 		emp3.setEmail("empresa3@email.com");
 		emp3.setSenha(PasswordUtil.encryptMD5("123"));
-		emp3.setNomeEmpresarial("Maria Aparecida");
-		emp3.setNomeFantasia("Block & CIA");
+		emp3.setNomeEmpresarial("Mario Ronaldo");
+		emp3.setNomeFantasia("Construtora D'ark");
 		emp3.setAprovado(false);
 
 		/* Oferta de Estágio */

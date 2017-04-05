@@ -32,6 +32,11 @@
 		      		<h:commandLink action="/pages/ofertaestagio/listagem?faces-redirect=true">Ofertas de Estágio</h:commandLink>
 		      	</c:if>
 	      	</li>
+	      	<li>
+		      	<c:if test="#{loginBean.perfil eq 'COORDENADOR'}">
+		      		<h:commandLink action="/pages/empresa/gerenciar?faces-redirect=true">Empresas</h:commandLink>
+		      	</c:if>
+	      	</li>
 	       <!--  <li><a href="#">Link</a></li>
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>

@@ -21,7 +21,7 @@
 	      <h:inputSecret id="senha" value="#{loginBean.usuario.senha}" pt:placeholder="Senha" requered="true"/>
 	      <h:commandButton id="btn-login" value="login" action="#{loginBean.autenticar}"/>
 	      <h:messages style="margin:auto" infoStyle="color:blue" errorStyle="color:red" layout="table" />
-	      <p class="message">Não tem cadastro? <a href="#">registre-se</a></p>
+	      <p class="message">Não tem cadastro? <h:commandLink id="btn-registro-empresa" value="registre-se" action="/pages/empresa/cadastro?faces-redirect=true"/></p>
 	      <div class="row padding" style="margin-top:20px">
 	      	<div class="col-md-offset-4 col-md-4">
 	      		<h:graphicImage library="images" name="logo-ifpb.png" class="img-responsive" alt="IFPB" height="70" width="70"/>

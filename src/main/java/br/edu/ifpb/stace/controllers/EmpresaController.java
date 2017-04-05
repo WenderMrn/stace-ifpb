@@ -73,10 +73,6 @@ public class EmpresaController {
 		this.empresa.setNomeFantasia(nomeFantasia[0]);
 		this.empresa.setCnpj(cnpj[0]);
 		this.empresa.setResponsavel(responsavel[0]);
-		this.empresa.setCodAtividadeEcoPric(codAtividadeEcoPric[0]);
-		this.empresa.setDescAtividadeEcoPric(descAtividadeEcoPric[0]);
-		this.empresa.setCodNaturezaJuridica(codNaturezaJuridica[0]);
-		this.empresa.setDesNaturezaJuridica(desNaturezaJuridica[0]);
 		this.empresa.setEndereco(endereco[0]);
 		this.empresa.setTelefone(telefone[0]);
 		this.empresa.setAprovado(false);
