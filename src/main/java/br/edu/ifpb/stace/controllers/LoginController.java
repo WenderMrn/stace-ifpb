@@ -1,7 +1,10 @@
 package br.edu.ifpb.stace.controllers;
 
+import org.hamcrest.core.IsInstanceOf;
+
 import br.edu.ifpb.inheritance.Pessoa;
 import br.edu.ifpb.stace.dao.PessoaDAO;
+import br.edu.ifpb.stace.entity.Empresa;
 import br.edu.ifpb.stace.util.PasswordUtil;
 import br.edu.ifpb.stace.util.StaceException;
 
@@ -17,7 +20,7 @@ public class LoginController {
 		
 		if (p != null) {
 			if (p.getSenha().equals(PasswordUtil.encryptMD5(passwd))) {
-				if(!p.isAprovado()){
+				if(!p.isAprovado() && p instanceof Empresa){
 					throw new StaceException("Usuário aguardando aprovação!");
 				}
 			} else {
