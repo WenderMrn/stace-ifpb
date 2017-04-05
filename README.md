@@ -1,4 +1,4 @@
-## S.T.A.C.E - SISTEMA ACADEMICO DE CONTROLE DE ESTÁGIO ###
+## S.T.A.C.E - SISTEMA ACADÊMICO DE CONTROLE DE ESTÁGIO ###
 
 ### Usuário de testes Aluno ###
 
